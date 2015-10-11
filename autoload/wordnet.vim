@@ -38,6 +38,15 @@ function! s:WordNetOpenWindow (text)
 
   call append("^", split(a:text, "\n"))
   exec 0
+
+  setlocal textwidth=80 wrapmargin=0 formatoptions=ant
+
+  let l:oldsearch = @/
+  g/./normal gqq
+  normal gg
+  call histdel('/', -1)
+  let @/ = l:oldsearch
+
   " Mark the buffer as scratch
   setlocal buftype=nofile
   setlocal bufhidden=hide
@@ -49,12 +58,12 @@ function! s:WordNetOpenWindow (text)
 
   mapclear <buffer>
   nmap <buffer> q :q<CR>
-  "syn match overviewHeader      /^Overview of .\+/
-  "
-  "syn match definitionEntry  /\v^[0-9]+\. .+$/ contains=numberedList,word
-  "syn match numberedList  /\v^[0-9]+\. / contained
-  "syn match word  /\v([0-9]+\.[0-9\(\) ]*)@<=[^-]+/ contained
-  "hi link overviewHeader Title
-  "hi link numberedList Operator
-  "hi def word term=bold cterm=bold gui=bold
+  syn match overviewHeader      /^Overview of .\+/
+  
+  syn match definitionEntry  /\v^[0-9]+\. .+$/ contains=numberedList,word
+  syn match numberedList  /\v^[0-9]+\. / contained
+  syn match word  /\v([0-9]+\.[0-9\(\) ]*)@<=.*(\ze -- )\@=/ contained
+  hi link overviewHeader Title
+  hi link numberedList Operator
+  hi def word term=bold cterm=bold gui=bold
 endfunction

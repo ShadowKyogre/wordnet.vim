@@ -17,10 +17,11 @@
 " <Leader>wns - Find synonyms for the word
 
 command! -nargs=+ Wordnet call wordnet#overviews("<args>")
+command! -nargs=+ WordnetSyns call wordnet#synonyms("<args>")
 
-noremap  <F7>     :call wordnet#overviews("<C-r>=expand("<cword>")<CR>")<CR>
-noremap  <S-F7>   :call wordnet#synonyms("<C-r>=expand("<cword>")<CR>")<CR>
-noremap  <C-S-F7> :call wordnet#browse("<C-r>=expand("<cword>")<CR>")<CR>
+" noremap  <F7>     :call wordnet#overviews("<C-r>=expand("<cword>")<CR>")<CR>
+" noremap  <S-F7>   :call wordnet#synonyms("<C-r>=expand("<cword>")<CR>")<CR>
+" noremap  <C-S-F7> :call wordnet#browse("<C-r>=expand("<cword>")<CR>")<CR>
 
 let s:wordnet_buffer_id = -1
 
